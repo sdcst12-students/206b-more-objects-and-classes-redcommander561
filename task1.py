@@ -9,7 +9,6 @@ class quadratic:
 
     def discriminant(self):
         x = self.b**2 - 4*self.a*self.c
-        print(x)
         # requires no positional arguments
         # will make use of class properties a,b and c
         # to determine the discriminant which is calculated as
@@ -21,29 +20,29 @@ class quadratic:
     def hasRealRoots(self):
         if self.discriminant() > 0:
             print("Two roots")
+            return True
         elif self.discriminant() == 0:
             print("One root")
+            return True
         else:
             print("No real roots")
-
+            return False
         # requires no positional arguments
         # will make use of class properties a,b and c
         # to determine if the quadratic has real roots
         # defined when the discriminant is non negative
         # return value should be True or False
-        pass
-        return True or False
+        
 
     def isFactorable(self):
         x = [1,4,9,16,49,64,81,100,]
-        if self.discriminant() == x:
-            self.discriminant() == True
-            print("True")
+        if self.discriminant() in x:
+            return True
+        elif self.discriminant() >= 0 and math.isqrt(self.discriminant())**2 == self.discriminant():
+            return True
         else:
-            self.discriminant() == False
-            print("false")
-        pass
-        return True or False
+            return False
+        
         # requires no positional arguments
         # will make use of class properties a,b and c
         # to determine if the quadratic can be factored
@@ -51,8 +50,19 @@ class quadratic:
         # return value is True or False
         
         
-   
     def calcRoots(self):
+        if not self.hasRealRoots():
+            self.roots = []
+            return self.roots
+        
+        d = self.discriminant()
+        if d == 0:
+            root1 = root2 = -self.b / (2 * self.a)
+        else:
+            root1 = (-self.b + math.sqrt(d)) / (2 * self.a)
+            root2 = (-self.b - math.sqrt(d)) / (2 * self.a)
+        self.roots = sorted([round(root1, 2), round(root2, 2)])
+        return self.roots
         # requires no positional arguments
         # will make use of class properties a,b and c
         # to determine the roots of the quadratic if
@@ -65,7 +75,6 @@ class quadratic:
         # list self.roots
         # list should be sorted in ascending order
         # roots should be rounded to 2 decimal places
-        pass
 
     def axisOfSymmetry(self):
         # requires no positional arguments
@@ -91,7 +100,6 @@ class quadratic:
         # this should require 3 positional arguments and assign the values
         # to self.a, self.b and self.c
         pass
-
 
 
 if __name__ == "__main__":
